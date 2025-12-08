@@ -59,7 +59,7 @@ volumes:
 Then run:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Building Locally
