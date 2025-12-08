@@ -1,0 +1,36 @@
+# Example Caddyfile demonstrating GeoIP2 usage
+# This is a sample configuration file for Caddy with the geoip2 plugin
+
+# Basic example with GeoIP2
+example.com {
+    # Load GeoIP2 database
+    geoip2 /etc/caddy/GeoLite2-Country.mmdb {
+        country_code {src_ip} country iso_code
+    }
+    
+    # Route based on country
+    @us {
+        expression {geoip2.country_code} == "US"
+    }
+    
+    @eu {
+        expression {geoip2.country_code} in ["GB", "FR", "DE", "IT", "ES"]
+    }
+    
+    handle @us {
+        respond "Hello from US server!"
+    }
+    
+    handle @eu {
+        respond "Hello from EU server!"
+    }
+    
+    handle {
+        respond "Hello from default server!"
+    }
+}
+
+# Note: You need to download the GeoLite2 database from MaxMind
+# and mount it as a volume in your Docker container.
+# Example:
+# docker run -v /path/to/GeoLite2-Country.mmdb:/etc/caddy/GeoLite2-Country.mmdb ...
