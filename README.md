@@ -75,6 +75,7 @@ docker build -t custom-caddy .
 This image is automatically built and pushed to GHCR via GitHub Actions when:
 - Code is pushed to the `main` or `master` branch
 - A new tag is created (e.g., `v1.0.0`)
+- Weekly on Sundays at midnight UTC (to keep dependencies up to date)
 - Manually triggered via workflow dispatch
 
 ## Available Tags
